@@ -45,7 +45,7 @@ const gameBoard = (() =>{
             createPlayer(document.querySelector("#player1").value,"X"),createPlayer(document.querySelector("#player2").value,"O")
         ]
 
-        current playerIndex = 0;
+        currentplayerIndex = 0;
         gameOver =false;
         gameBoard.render();
         const squares= document.querySelectorAll(".square");
