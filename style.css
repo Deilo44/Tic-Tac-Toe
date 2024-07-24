@@ -18,6 +18,7 @@ h1 {
     flex-wrap: wrap;
     float: left;
     border: 2px solid blue;
+    background-color: aquamarine;
     justify-content: center;
     align-items: center;
     width: 25%;
