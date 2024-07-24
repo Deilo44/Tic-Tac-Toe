@@ -18,22 +18,22 @@ const gameBoard = (() =>{
         document.querySelector("#gameBoard").innerHTML = boardHTML;
         const squares= document.querySelectorAll(".square");
         squares.forEach((square) =>{
-            square.addEventListener("click", Game.handleClick);
+            square.addEventListener("click", handleClick);
         })
     }
-    const update= (index, valua) => {
-        gameboard[index]= value;
+    const update= (index, value) => {
+        gameBoard[index]= value;
         render();
     };
 
-    const getGameboard =() => gameBoard;
+    const getGameBoard =() => gameBoard;
     return {
         render,
         update,
-        getGameboard
+        getGameBoard
     }
 
-    const createPlayer =(name, mark) => {
+    const createPlayer = (name, mark) => {
         return {
             name,
             mark
@@ -45,7 +45,7 @@ const gameBoard = (() =>{
             createPlayer(document.querySelector("#player1").value,"X"),createPlayer(document.querySelector("#player2").value,"O")
         ]
 
-        currentplayerIndex = 0;
+        currentPlayerIndex = 0;
         gameOver =false;
         gameBoard.render();
         const squares= document.querySelectorAll(".square");
@@ -62,17 +62,17 @@ const gameBoard = (() =>{
 
         let index = parseInt(event.target.id.split("-")[1]);
 
-        if(gameBoard.getGameboard()[index]!=="")
+        if(gameBoard.getGameBoard()[index]!=="")
             return;
 
         gameBoard.update(index, players[currentPlayerIndex].mark);
 
-        if(checkForWin(gameBoard.getGameboard(),players[currentPlayerIndex].mark)){
+        if(checkForWin(gameBoard.getGameBoard(),players[currentPlayerIndex].mark)){
             gameOver=true;
 
             displayController.renderMessage(`${players[currentPlayerIndex].name} wins`)
         }
-        else if (checkforTie(gameBoard.getGameboard())){
+        else if (checkforTie(gameBoard.getGameBoard())){
             gameOver=true;
             displayController.renderMessage("it's a Tie");
         }
@@ -126,6 +126,6 @@ restartButton.addEventListener("click",()=>{
 })
 
 const startButton = document.querySelector("#startButton");
-restartButton.addEventListener("click",()=>{
+startButton.addEventListener("click",()=>{
     Game.start();
 })
