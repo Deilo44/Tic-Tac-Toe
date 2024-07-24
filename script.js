@@ -13,13 +13,13 @@ const gameBoard = (() =>{
     const render = () => {
         let boardHTML="";
         gameBoard.forEach((square , index)=> {
-            boardHTML += `<div class ="square" id="square-${index}"> ${square}</div> `
-        })
+            boardHTML += `<div class ="square" id="square-${index}"> ${square}</div> `;
+        });
         document.querySelector("#gameBoard").innerHTML = boardHTML;
         const squares= document.querySelectorAll(".square");
         squares.forEach((square) =>{
-            square.addEventListener("click", handleClick);
-        })
+            square.addEventListener("click", Game.handleClick);
+        });
     }
     const update= (index, value) => {
         gameBoard[index]= value;
@@ -27,32 +27,39 @@ const gameBoard = (() =>{
     };
 
     const getGameBoard =() => gameBoard;
+
     return {
         render,
         update,
         getGameBoard
     }
+})();
 
-    const createPlayer = (name, mark) => {
-        return {
-            name,
-            mark
-        }
+const createPlayer = (name, mark) => {
+    return {
+        name,
+        mark
     }
+}
 
+const Game = (()=>{
+    let players=[];
+    let currentPlayerIndex;
+    let gameOver;
+    
     const start =() => {
         players =[
-            createPlayer(document.querySelector("#player1").value,"X"),createPlayer(document.querySelector("#player2").value,"O")
-        ]
+            createPlayer(document.querySelector("#player1").value,"X"),
+            createPlayer(document.querySelector("#player2").value,"O")
+        ];
 
         currentPlayerIndex = 0;
         gameOver =false;
         gameBoard.render();
         const squares= document.querySelectorAll(".square");
-
         squares.forEach((square)=>{
-            square.addEventListener("click", handleClick);
-        })
+           square.addEventListener("click", handleClick);
+        });
     }
 
     const handleClick = (event) => {
@@ -104,8 +111,8 @@ function checkForWin (board){
         [1,4,7],
         [2,5,8],
         [0,4,8],
-        [2,5,6]
-    ]
+        [2,4,6]
+    ];
     for(let i=0; i<winningCombinations.length; i++){
         const [a,b,c] = winningCombinations[i];
 
@@ -117,7 +124,7 @@ function checkForWin (board){
 }
 
 function checkforTie(board){
-    return board.every(cell =>cell !=="")
+    return board.every(cell => cell !=="")
 }
 
 const restartButton = document.querySelector("#restartButton");
